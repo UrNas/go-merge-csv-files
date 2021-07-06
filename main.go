@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/csv"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -14,8 +15,15 @@ import (
 var firstInstall string = "No"
 var secondInstall string = "No"
 var thirdInstall string = "No"
+var fFile, sFile, tFile string
 
+func init() {
+	flag.StringVar(&fFile, "finst", "first.csv", "Path of First Instllment File")
+	flag.StringVar(&sFile, "sinst", "second.csv", "Path of Second Instllment File")
+	flag.StringVar(&tFile, "thinst", "third.csv", "Path of Third Instllment File")
+}
 func main() {
+	flag.Parse()
 	colleges := []string{
 		"Technical Computer Engineering",
 		"Medical Lab Technology",
@@ -30,15 +38,15 @@ func main() {
 	}
 	var resutl [][]string
 	var record []string
-	ffile, err := ioutil.ReadFile("files/first.csv")
+	ffile, err := ioutil.ReadFile(fFile)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	sfile, err := ioutil.ReadFile("files/second.csv")
+	sfile, err := ioutil.ReadFile(sFile)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	bfile, err := ioutil.ReadFile("files/third.csv")
+	bfile, err := ioutil.ReadFile(tFile)
 	if err != nil {
 		log.Fatalln(err)
 	}
